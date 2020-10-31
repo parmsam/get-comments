@@ -1,4 +1,11 @@
-getCommentLines <- function(filename) {
+getSourceEditorPath <- function() {
+  #function to get path to file currently shown in source editor
+  path <- paste0(dirname(rstudioapi::getSourceEditorContext()$path),
+                 gsub("~","",rstudioapi::getSourceEditorContext()$path))
+  return(path)
+}
+
+getCommentLines <- function(filename=getSourceEditorPath()) {
   #function to get all lines with R comments
   lines_vector <- readLines(filename, warn = FALSE) 
   comments_vector = c()
@@ -11,7 +18,7 @@ getCommentLines <- function(filename) {
   return(comments_vector)
 }
 
-getOutlineLines <- function(filename) {
+getOutlineLines <- function(filename=getSourceEditorPath()) {
   #function to get all lines with outline comment
   lines_vector <- readLines(filename, warn = FALSE)
   comments_vector = c()
@@ -36,7 +43,7 @@ getSpecialLines <- function(filename, pattern) {
   return(comments_vector)
 }
 
-getTodoLines <- function(filename) {
+getTodoLines <- function(filename=getSourceEditorPath()) {
   #function to get all lines with TODO comment
   lines_vector <- readLines(filename, warn = FALSE) 
   comments_vector = c()
@@ -49,7 +56,7 @@ getTodoLines <- function(filename) {
   return(comments_vector)
 }
 
-getFixmeLines <- function(filename) {
+getFixmeLines <- function(filename=getSourceEditorPath()) {
   #function to get all lines with FIXME comment
   lines_vector <- readLines(filename, warn = FALSE) 
   comments_vector = c()
@@ -62,7 +69,7 @@ getFixmeLines <- function(filename) {
   return(comments_vector)
 }
 
-getNoteLines <- function(filename) {
+getNoteLines <- function(filename=getSourceEditorPath()) {
   #function to get all lines with NOTE comment
   lines_vector <- readLines(filename, warn = FALSE) 
   comments_vector = c()
@@ -73,13 +80,6 @@ getNoteLines <- function(filename) {
     }
   }
   return(comments_vector)
-}
-
-getSourceEditorPath <- function() {
-  #function to get path to file currently shown in source editor
-  path <- paste0(dirname(rstudioapi::getSourceEditorContext()$path),
-         gsub("~","",rstudioapi::getSourceEditorContext()$path))
-  return(path)
 }
 
 #TODO: add copy to clipboard option in functions
