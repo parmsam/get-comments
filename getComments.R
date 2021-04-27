@@ -63,14 +63,14 @@ getCommentLines <- function(
   getLines(filename, clipboard, pattern=pattern_string, output, line_numbers)
 }
 
-#apply general function with outline pattern
-getOutlineLines <- function(
+#apply general function with section patterns
+getSectionLines <- function(
   filename = getSourceEditorPath(),
   clipboard = FALSE,
   output='list',
   line_numbers=FALSE) {
-  #function to get all lines with outline comment
-  pattern_string = paste(c("####", "----"), collapse = "|")
+  #function to get all lines with section comment
+  pattern_string = paste(c("####", "----", "===="), collapse = "|")
   getLines(filename, clipboard, pattern=pattern_string, output, line_numbers)
 }
 
