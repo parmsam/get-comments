@@ -108,7 +108,7 @@ getNoteLines <- function(
 }
 
 #apply general function to multi pattern
-getNoteLines <- function(
+getMultiLines <- function(
   filename = getSourceEditorPath(),
   clipboard = FALSE,
   output='list',
