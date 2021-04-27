@@ -18,7 +18,7 @@ getLines <- function(
   lines_vector <- readLines(filename, warn = FALSE)
   comments_vector = c()
   for(codeline in lines_vector){
-    if(grepl(pattern, codeline)){
+    if(grepl(pattern, codeline, ignore.case = TRUE)){
       comments_vector = append(comments_vector, codeline)
     }
   }
@@ -31,7 +31,7 @@ getLines <- function(
   }
 }
 
-#apply general function with comment pattern
+#apply general function to comment pattern
 getCommentLines <- function(
   filename=getSourceEditorPath(),
   clipboard = FALSE) {
@@ -49,7 +49,7 @@ getOutlineLines <- function(
   getLines(filename, clipboard, pattern=pattern_string, output=TRUE)
 }
 
-#apply general function with TODO pattern
+#apply general function to TODO pattern
 getTodoLines <- function(
   filename=getSourceEditorPath(),
   clipboard = FALSE) {
@@ -58,7 +58,7 @@ getTodoLines <- function(
   getLines(filename, clipboard, pattern=pattern_string, output=TRUE)
 }
 
-#apply general function with FIXME pattern
+#apply general function to FIXME pattern
 getFixmeLines <- function(
   filename=getSourceEditorPath(),
   clipboard = FALSE) {
@@ -67,7 +67,7 @@ getFixmeLines <- function(
   getLines(filename, clipboard, pattern=pattern_string, output=TRUE)
 }
 
-#apply general function with NOTE pattern
+#apply general function to NOTE pattern
 getNoteLines <- function(
   filename=getSourceEditorPath(),
   clipboard = FALSE) {
@@ -76,11 +76,23 @@ getNoteLines <- function(
   getLines(filename, clipboard, pattern=pattern_string, output=TRUE)
 }
 
+#apply general function to multi pattern
+getNoteLines <- function(
+  filename=getSourceEditorPath(),
+  clipboard = FALSE) {
+  #function to get all lines with NOTE comment
+  pattern_string = paste(c("FIXME", "TODO", "CHANGED", "IDEA", "HACK", "NOTE",
+                           "REVIEW", "BUG", "QUESTION", "COMBAK", "TEMP" ), collapse="|")
+  getLines(filename, clipboard, pattern=pattern_string, output=TRUE)
+}
+
 #TODO: add line number list or column
 
 #TODO: convert to dataframe output
 # data.frame(Comment = unlist(getCommentLines() ))
+
 #TODO: add comments count function
 
 #TODO: add different output options
-#TODO: add support for other languages
+
+s#TODO: add support for other languages
