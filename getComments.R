@@ -41,7 +41,8 @@ getLines <- function(
   }
   else if (output == 'dataframe'){
     if (line_numbers == FALSE) {
-      df <- data.frame(Comment = map(comments_vector, 1) )
+      Comment_list = map(comments_vector,1)
+      df <- data.frame(Comment = unlist(Comment_list) )
     }
     else if (line_numbers == TRUE){
       Line_Number_list = map(comments_vector,1)
